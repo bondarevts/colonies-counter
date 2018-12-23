@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="canvas" width="800" height="800"></canvas>
+
+<img id="plate" width="220" height="220" src="imgs/test_image.jpg" style="display: none;">
+
+<script>
+var MARK_SIZE = 20;
+var CANVAS_SIZE = {x: 800, y: 800};
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+var totalColonies = 0;
+
+window.onload = function() {
+    var img = document.getElementById("plate");
+    ctx.drawImage(img, 0, 0, CANVAS_SIZE.x, CANVAS_SIZE.y);
+
+    document.addEventListener('mousedown', markColony);
+}
+
+function markColony(e) {
+    var rect = canvas.getBoundingClientRect();
+    var x = (e.clientX - rect.left) / (rect.right - rect.left) * canvas.width;
+    var y = (e.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height;
+    console.log(x + " " + y);
+    if (x >= 0 && y >= 0 && x <= CANVAS_SIZE.x && y <= CANVAS_SIZE.y) {
+        drawCircle(x, y);
+        ++totalColonies;
+        document.getElementById("colonies-counter").innerText = totalColonies;
+    }
+}
+
+function drawCircle(x, y) {
+    ctx.beginPath();
+    ctx.fillStyle = "rgba(0, 0, 255, 0.4)";
+    ctx.arc(x, y, 5, 0, 2 * Math.PI);
+    ctx.fill();
+}
+
+function drawCrossMark(x, y) {
+    ctx.beginPath();
+    ctx.moveTo(x - MARK_SIZE/2, y - MARK_SIZE/2);
+    ctx.lineTo(x + MARK_SIZE/2, y + MARK_SIZE/2);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x + MARK_SIZE/2, y - MARK_SIZE/2);
+    ctx.lineTo(x - MARK_SIZE/2, y + MARK_SIZE/2);
+    ctx.stroke();
+}
+
+</script>
+
+<p>Total: <span id="colonies-counter">0</span></p>
+
+</body>
+</html>
