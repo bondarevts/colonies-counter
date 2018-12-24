@@ -42,6 +42,8 @@ function loadImage() {
 
     function imageLoaded() {
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+	totalColonies = 0;
+	document.getElementById("colonies-counter").innerText = totalColonies;
     }
 }
 
