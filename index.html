@@ -2,6 +2,9 @@
 <html>
 <body>
 
+<div>
+<input type="file" id="image">
+</div>
 <canvas id="canvas" width="800" height="800"></canvas>
 
 <img id="plate" width="220" height="220" src="imgs/test_image.jpg" style="display: none;">
@@ -17,6 +20,7 @@ window.onload = function() {
     var img = document.getElementById("plate");
     ctx.drawImage(img, 0, 0, CANVAS_SIZE.x, CANVAS_SIZE.y);
 
+    document.addEventListener("touchstart", markColony);
     document.addEventListener('mousedown', markColony);
 }
 
