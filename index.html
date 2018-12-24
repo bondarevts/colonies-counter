@@ -3,7 +3,7 @@
 <body>
 
 <div>
-<input type="file" id="image">
+<input type="file" id="image" onchange='loadImage();'>
 </div>
 <canvas id="canvas" width="400" height="400"></canvas>
 
@@ -20,8 +20,34 @@ window.onload = function() {
     var img = document.getElementById("plate");
     ctx.drawImage(img, 0, 0, CANVAS_SIZE.x, CANVAS_SIZE.y);
 
-    document.addEventListener("touchstart", markColony);
+    document.addEventListener("touchstart", touchMarkColony);
     document.addEventListener('mousedown', markColony);
+}
+
+
+function loadImage() {
+    var img;
+
+    var input = document.getElementById('image');
+    var file = input.files[0];
+    var fr = new FileReader();
+    fr.onload = createImage;
+    fr.readAsDataURL(file);
+
+    function createImage() {
+        img = new Image();
+        img.onload = imageLoaded;
+        img.src = fr.result;
+    }
+
+    function imageLoaded() {
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    }
+}
+
+
+function touchMarkColony(e) {
+	markColony(e.touches[0]);
 }
 
 function markColony(e) {
@@ -60,3 +86,5 @@ function drawCrossMark(x, y) {
 
 </body>
 </html>
+
+
