@@ -5,13 +5,13 @@
 <div>
 <input type="file" id="image">
 </div>
-<canvas id="canvas" width="800" height="800"></canvas>
+<canvas id="canvas" width="400" height="400"></canvas>
 
 <img id="plate" width="220" height="220" src="imgs/test_image.jpg" style="display: none;">
 
 <script>
 var MARK_SIZE = 20;
-var CANVAS_SIZE = {x: 800, y: 800};
+var CANVAS_SIZE = {x: 400, y: 400};
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 var totalColonies = 0;
