@@ -1,4 +1,4 @@
-var MARK_FUNCTION = drawCrossMark;
+var MARK_FUNCTION = drawCircle;
 var totalColonies = 0;
 
 var canvas = SVG('canvas-wrapper').size(400, 100);
@@ -21,6 +21,7 @@ function markColony(e) {
 
 function touchMarkColony(e) {
     markColony(e.touches[0]);
+    e.preventDefault();
 }
 
 function drawImage(img) {
