@@ -1,15 +1,11 @@
-var canvas = document.createElement('canvas');
-var ctx = canvas.getContext("2d");
-canvas.id = 'canvas';
-canvas.width  = 400;
-canvas.height = 100;
-
-document.body.appendChild(canvas);
-
-ctx.font = "30px Arial";
-ctx.fillText("Load an image", 80, 70);
-
+var MARK_FUNCTION = drawCrossMark;
 var totalColonies = 0;
+
+var canvas = SVG('canvas-wrapper').size(400, 100);
+var text = canvas.text("Load an image");
+
+canvas.click(markColony);
+canvas.touchstart(touchMarkColony);
 
 function setTotalColoniesCount(count) {
     totalColonies = count;
@@ -17,54 +13,32 @@ function setTotalColoniesCount(count) {
 }
 
 function markColony(e) {
-    var rect = canvas.getBoundingClientRect();
-    var x = (e.clientX - rect.left) / (rect.right - rect.left) * canvas.width;
-    var y = (e.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height;
-    console.log(x + " " + y);
-    if (x >= 0 && y >= 0 && x <= canvas.width && y <= canvas.height) {
-        drawCircle(x, y);
-        setTotalColoniesCount(totalColonies + 1);
-    }
+    var x = e.pageX - canvas.parent().offsetLeft;
+    var y = e.pageY - canvas.parent().offsetTop;
+    MARK_FUNCTION(x, y);
+    setTotalColoniesCount(totalColonies + 1);
 }
 
 function touchMarkColony(e) {
     markColony(e.touches[0]);
 }
 
-function drawImageOnLoad(img) {
-    return function() {
-        setTotalColoniesCount(0);
-        canvas.width = img.width;
-        canvas.height = img.height;
-        ctx.drawImage(img, 0, 0, img.width, img.height);
-    }
-}
-
-window.onload = function() {
-    document.addEventListener("touchstart", touchMarkColony);
-    document.addEventListener('mousedown', markColony);
+function drawImage(img) {
+    setTotalColoniesCount(0);
+    canvas.image(img).loaded(function(loader) {
+        canvas.size(loader.width, loader.height);
+    });
 }
 
 function loadTestImage() {
-    var img = new Image();
-    img.src = "imgs/test_image.jpg";
-    img.onload = drawImageOnLoad(img);
+    drawImage("imgs/test_image.jpg");
 }
 
 function loadImage() {
-    var img;
-
-    var input = document.getElementById('image-browser');
-    var file = input.files[0];
-    var fr = new FileReader();
-    fr.onload = createImage;
-    fr.readAsDataURL(file);
-
-    function createImage() {
-        img = new Image();
-        img.onload = drawImageOnLoad(img);
-        img.src = fr.result;
-    }
+    var file = document.getElementById('image-browser').files[0];
+    var reader = new FileReader();
+    reader.onload = function() {
+        drawImage(reader.result);
+    };
+    reader.readAsDataURL(file);
 }
-
-
