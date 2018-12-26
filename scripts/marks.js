@@ -1,3 +1,5 @@
+var MARK_SIZE = 10;
+
 function drawCircle(x, y) {
     ctx.beginPath();
     ctx.fillStyle = "rgba(0, 0, 255, 0.4)";

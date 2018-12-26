@@ -1,8 +1,3 @@
-var MARK_SIZE = 10;
-var CANVAS_SIZE = {x: 400, y: 400};
-
-
-
 var canvas = document.createElement('canvas');
 var ctx = canvas.getContext("2d");
 canvas.id = 'canvas';
