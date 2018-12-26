@@ -3,32 +3,42 @@
 <body>
 
 <div>
-<input type="file" id="image" onchange='loadImage();'>
+<input type="file" id="image-browser" onchange='loadImage();'>
+<button type="button" onclick="loadTestImage()">Load a test image</button>
 </div>
-<canvas id="canvas" width="400" height="400" style="touch-action: manipulation"></canvas>
-
-<img id="plate" width="220" height="220" src="imgs/test_image.jpg" style="display: none;">
 
 <script>
-var MARK_SIZE = 20;
+var MARK_SIZE = 10;
 var CANVAS_SIZE = {x: 400, y: 400};
-var canvas = document.getElementById("canvas");
+
+var canvas = document.createElement('canvas');
 var ctx = canvas.getContext("2d");
+canvas.id = 'canvas';
+canvas.width  = 400;
+canvas.height = 100;
+
+document.body.appendChild(canvas);
+
+ctx.font = "30px Arial";
+ctx.fillText("Load an image", 80, 70);
+
 var totalColonies = 0;
 
 window.onload = function() {
-    var img = document.getElementById("plate");
-    ctx.drawImage(img, 0, 0, CANVAS_SIZE.x, CANVAS_SIZE.y);
-
     document.addEventListener("touchstart", touchMarkColony);
     document.addEventListener('mousedown', markColony);
 }
 
+function loadTestImage() {
+    var img = new Image();
+    img.src = "imgs/test_image.jpg";
+    img.onload = drawImageOnLoad(img);
+}
 
 function loadImage() {
     var img;
 
-    var input = document.getElementById('image');
+    var input = document.getElementById('image-browser');
     var file = input.files[0];
     var fr = new FileReader();
     fr.onload = createImage;
@@ -36,20 +46,22 @@ function loadImage() {
 
     function createImage() {
         img = new Image();
-        img.onload = imageLoaded;
+        img.onload = drawImageOnLoad(img);
         img.src = fr.result;
-    }
-
-    function imageLoaded() {
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-	totalColonies = 0;
-	document.getElementById("colonies-counter").innerText = totalColonies;
     }
 }
 
+function drawImageOnLoad(img) {
+    return function() {
+        setTotalColoniesCount(0);
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0, img.width, img.height);
+    }
+}
 
 function touchMarkColony(e) {
-	markColony(e.touches[0]);
+    markColony(e.touches[0]);
 }
 
 function markColony(e) {
@@ -57,17 +69,21 @@ function markColony(e) {
     var x = (e.clientX - rect.left) / (rect.right - rect.left) * canvas.width;
     var y = (e.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height;
     console.log(x + " " + y);
-    if (x >= 0 && y >= 0 && x <= CANVAS_SIZE.x && y <= CANVAS_SIZE.y) {
+    if (x >= 0 && y >= 0 && x <= canvas.width && y <= canvas.height) {
         drawCircle(x, y);
-        ++totalColonies;
-        document.getElementById("colonies-counter").innerText = totalColonies;
+        setTotalColoniesCount(totalColonies + 1);
     }
+}
+
+function setTotalColoniesCount(count) {
+    totalColonies = count;
+    document.getElementById("colonies-counter").innerText = totalColonies;
 }
 
 function drawCircle(x, y) {
     ctx.beginPath();
     ctx.fillStyle = "rgba(0, 0, 255, 0.4)";
-    ctx.arc(x, y, 5, 0, 2 * Math.PI);
+    ctx.arc(x, y, MARK_SIZE/2, 0, 2 * Math.PI);
     ctx.fill();
 }
 
@@ -88,5 +104,3 @@ function drawCrossMark(x, y) {
 
 </body>
 </html>
-
-
