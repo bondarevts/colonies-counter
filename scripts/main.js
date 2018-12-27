@@ -1,11 +1,31 @@
 var MARK_FUNCTION = drawCircle;
+var shouldMarkColony = false;
+
 var totalColonies = 0;
 
 var canvas = SVG('canvas-wrapper').size(400, 100);
 var text = canvas.text("Load an image");
 
 canvas.click(markColony);
-canvas.touchstart(touchMarkColony);
+
+canvas.touchstart(processTouchStart);
+canvas.touchmove(processTouchMove);
+canvas.touchend(processTouchEnd);
+
+function processTouchStart(e) {
+    shouldMarkColony = true;
+}
+
+function processTouchMove(e) {
+    shouldMarkColony = false;
+}
+
+function processTouchEnd(e) {
+    if (shouldMarkColony) {
+        markColony(e.touches[0]);
+        e.preventDefault();
+    }
+}
 
 function setTotalColoniesCount(count) {
     totalColonies = count;
@@ -17,11 +37,6 @@ function markColony(e) {
     var y = e.pageY - canvas.parent().offsetTop;
     MARK_FUNCTION(x, y);
     setTotalColoniesCount(totalColonies + 1);
-}
-
-function touchMarkColony(e) {
-    markColony(e.touches[0]);
-    e.preventDefault();
 }
 
 function drawImage(img) {
