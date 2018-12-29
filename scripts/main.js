@@ -1,30 +1,15 @@
 var MARK_FUNCTION = drawCircle;
-var shouldMarkColony = false;
 
 var totalColonies = 0;
 
-var canvas = SVG('canvas-wrapper').size(400, 100);
+var canvas = SVG('canvas-wrapper').size(400, 100).style('touch-action', 'manipulation');
 var text = canvas.text("Load an image");
 
 canvas.click(markColony);
-
 canvas.touchstart(processTouchStart);
-canvas.touchmove(processTouchMove);
-canvas.touchend(processTouchEnd);
 
 function processTouchStart(e) {
-    shouldMarkColony = true;
-}
-
-function processTouchMove(e) {
-    shouldMarkColony = false;
-}
-
-function processTouchEnd(e) {
-    if (shouldMarkColony) {
-        markColony(e.touches[0]);
-        e.preventDefault();
-    }
+    markColony(e.touches[0]);
 }
 
 function setTotalColoniesCount(count) {
