@@ -9,6 +9,9 @@ canvas.click(markColony);
 canvas.touchstart(processTouchStart);
 
 function processTouchStart(e) {
+    if (e.touches.length > 1) {
+        return;
+    }
     markColony(e.touches[0]);
 }
 
