@@ -6,14 +6,6 @@ var canvas = SVG('canvas-wrapper').size(400, 100).style('touch-action', 'manipul
 var text = canvas.text("Load an image");
 
 canvas.click(markColony);
-canvas.touchstart(processTouchStart);
-
-function processTouchStart(e) {
-    if (e.touches.length > 1) {
-        return;
-    }
-    markColony(e.touches[0]);
-}
 
 function setTotalColoniesCount(count) {
     totalColonies = count;
