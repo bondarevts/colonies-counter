@@ -1,5 +1,3 @@
-var MARK_SIZE = 50;
-
 function drawCircle(x, y) {
     var diameter = MARK_SIZE;
     var radius = diameter / 2;

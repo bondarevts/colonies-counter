@@ -1,4 +1,5 @@
 var MARK_FUNCTION = drawCircle;
+var markSize = 50;
 
 var canvas = SVG('canvas-wrapper').size(400, 100).style('touch-action', 'manipulation');
 var text = canvas.text("Load an image");
@@ -28,6 +29,12 @@ function cancel() {
     var figure = marks.pop();
     figure.remove();
     updateColoniesCounter();
+}
+
+function changeMarkSize() {
+    console.log(document.getElementById("mark-size").value);
+    markSize = parseInt(document.getElementById("mark-size").value);
+    document.getElementById("mark-size-value").value = markSize;
 }
 
 function markColony(e) {

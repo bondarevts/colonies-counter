@@ -6,6 +6,11 @@
 <input type="file" id="image-browser" onchange='loadImage();'>
 <button type="button" onclick="loadTestImage()">Load a test image</button>
 <button type="button" onclick="cancel()" style="touch-action: manipulation;">Cancel</button>
+<div>
+    <label for="mark-size">Mark Size</label>
+    <input type="range" id="mark-size" name="mark-size" min="1" max="80" value="50" oninput="changeMarkSize();">
+    <output name="mark-size-value" id="mark-size-value">50</output>
+</div>
 <p>Total: <span id="colonies-counter">0</span></p>
 </div>
 <div id="canvas-wrapper"></div>
