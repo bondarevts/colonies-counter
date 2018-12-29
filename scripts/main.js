@@ -1,26 +1,43 @@
 var MARK_FUNCTION = drawCircle;
 
-var totalColonies = 0;
-
 var canvas = SVG('canvas-wrapper').size(400, 100).style('touch-action', 'manipulation');
 var text = canvas.text("Load an image");
 
+var marks = [];
+
 canvas.click(markColony);
 
-function setTotalColoniesCount(count) {
-    totalColonies = count;
-    document.getElementById("colonies-counter").innerText = totalColonies;
+function addMark(x, y) {
+    marks.push(MARK_FUNCTION(x, y));
+    updateColoniesCounter();
+}
+
+function clearMarks() {
+    marks.length = 0;
+    updateColoniesCounter();
+}
+
+function updateColoniesCounter() {
+    document.getElementById("colonies-counter").innerText = marks.length;
+}
+
+function cancel() {
+    if (marks.length == 0) {
+        return;
+    }
+    var figure = marks.pop();
+    figure.remove();
+    updateColoniesCounter();
 }
 
 function markColony(e) {
     var x = e.pageX - canvas.parent().offsetLeft;
     var y = e.pageY - canvas.parent().offsetTop;
-    MARK_FUNCTION(x, y);
-    setTotalColoniesCount(totalColonies + 1);
+    addMark(x, y);
 }
 
 function drawImage(img) {
-    setTotalColoniesCount(0);
+    clearMarks();
     canvas.image(img).loaded(function(loader) {
         canvas.size(loader.width, loader.height);
     });
