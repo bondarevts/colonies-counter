@@ -25,7 +25,7 @@ function updateColoniesCounter() {
     document.getElementById("colonies-counter").innerText = points.length;
 }
 
-function cancel() {
+function undoClick() {
     if (points.length == 0) {
         return;
     }
