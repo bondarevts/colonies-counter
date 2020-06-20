@@ -53,7 +53,7 @@ function drawImage(img) {
 }
 
 function loadTestImage() {
-    file_name = "test_image.jpg"
+    file_name = "test_image.jpg";
     drawImage("imgs/" + file_name);
 }
 
@@ -88,5 +88,5 @@ function download(filename, text) {
 }
 
 function downloadPoints() {
-    download(file_name + ".csv", pointsToCSV())
+    download(file_name + ".csv", pointsToCSV());
 }
