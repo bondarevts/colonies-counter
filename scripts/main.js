@@ -1,38 +1,42 @@
-var markSize = 50;
+var diameter = 50;
 
 var canvas = SVG('canvas-wrapper').size(400, 100).style('touch-action', 'manipulation');
 var text = canvas.text("Load an image");
 
 var marks = [];
+var points = [];
 
 canvas.click(markColony);
 
 function addMark(x, y) {
-    marks.push(drawCircle(x, y, markSize));
+    points.push([x, y, diameter]);
+    marks.push(drawCircle(x, y, diameter));
     updateColoniesCounter();
 }
 
 function clearMarks() {
     marks.length = 0;
+    points.length = 0;
     updateColoniesCounter();
 }
 
 function updateColoniesCounter() {
-    document.getElementById("colonies-counter").innerText = marks.length;
+    document.getElementById("colonies-counter").innerText = points.length;
 }
 
 function cancel() {
-    if (marks.length == 0) {
+    if (points.length == 0) {
         return;
     }
+    points.pop();
     var figure = marks.pop();
     figure.remove();
     updateColoniesCounter();
 }
 
 function changeMarkSize() {
-    markSize = parseInt(document.getElementById("mark-size").value);
-    document.getElementById("mark-size-value").value = markSize;
+    diameter = parseInt(document.getElementById("mark-size").value);
+    document.getElementById("mark-size-value").value = diameter;
 }
 
 function markColony(e) {
