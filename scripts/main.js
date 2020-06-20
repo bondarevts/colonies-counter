@@ -29,8 +29,7 @@ function cancel() {
         return;
     }
     points.pop();
-    var figure = marks.pop();
-    figure.remove();
+    marks.pop().remove();
     updateColoniesCounter();
 }
 
