@@ -6,6 +6,7 @@
 <input type="file" id="image-browser" onchange='loadImage();'>
 <button type="button" onclick="loadTestImage()">Load a test image</button>
 <button type="button" onclick="cancel()" style="touch-action: manipulation;">Undo a click</button>
+<button type="button" onclick="downloadPoints()" style="touch-action: manipulation;">Download points</button>
 <div>
     <label for="mark-size">Mark Diameter</label>
     <input type="range" id="mark-size" name="mark-size" min="1" max="80" value="50" oninput="changeMarkSize();">
