@@ -7,7 +7,7 @@
 <button type="button" onclick="loadTestImage()">Load a test image</button>
 <button type="button" onclick="cancel()" style="touch-action: manipulation;">Undo a click</button>
 <div>
-    <label for="mark-size">Mark Size</label>
+    <label for="mark-size">Mark Diameter</label>
     <input type="range" id="mark-size" name="mark-size" min="1" max="80" value="50" oninput="changeMarkSize();">
     <output name="mark-size-value" id="mark-size-value">50</output>
 </div>
@@ -16,7 +16,6 @@
 <div id="canvas-wrapper"></div>
 
 <script src="scripts/svg.js"></script>
-<script src="scripts/marks.js"></script>
 <script src="scripts/main.js"></script>
 
 </body>
