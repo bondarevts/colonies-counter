@@ -32,7 +32,6 @@ function cancel() {
 }
 
 function changeMarkSize() {
-    console.log(document.getElementById("mark-size").value);
     markSize = parseInt(document.getElementById("mark-size").value);
     document.getElementById("mark-size-value").value = markSize;
 }
