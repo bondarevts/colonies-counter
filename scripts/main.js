@@ -1,7 +1,7 @@
 var diameter = 50;
 
 var canvas = SVG('canvas-wrapper').size(400, 100).style('touch-action', 'manipulation');
-var text = canvas.text("Load an image");
+var greetingText = canvas.text("Load an image");
 
 var file_name = "";
 var marks = [];
@@ -47,6 +47,7 @@ function markColony(e) {
 }
 
 function drawImage(img) {
+    greetingText.remove();
     clearMarks();
     canvas.image(img).loaded(function(loader) {
         canvas.size(loader.width, loader.height);
