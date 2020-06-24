@@ -16,6 +16,7 @@ function addMark(x, y) {
 }
 
 function clearMarks() {
+    marks.forEach(m => m.remove())
     marks.length = 0;
     points.length = 0;
     updateColoniesCounter();
