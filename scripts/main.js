@@ -2,6 +2,7 @@ var diameter = 50;
 
 var canvas = SVG('canvas-wrapper').size(400, 100).style('touch-action', 'manipulation');
 var greetingText = canvas.text("Load an image");
+var plateImage = null;
 
 var file_name = "";
 var marks = [];
@@ -47,9 +48,17 @@ function markColony(e) {
 }
 
 function drawImage(img) {
-    greetingText.remove();
+    if (greetingText != null) {
+        greetingText.remove();
+        greetingText = null;
+    }
+    if (plateImage != null) {
+        plateImage.remove();
+        plateImage = null;
+    }
     clearMarks();
-    canvas.image(img).loaded(function(loader) {
+    plateImage = canvas.image(img);
+    plateImage.loaded(function(loader) {
         canvas.size(loader.width, loader.height);
     });
 }
