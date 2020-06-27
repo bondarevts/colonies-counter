@@ -46,9 +46,11 @@ function changeMarkSize() {
 }
 
 function markColony(e) {
-    var x = e.pageX - canvas.parent().offsetLeft;
-    var y = e.pageY - canvas.parent().offsetTop;
-    addMark(x, y);
+    if (plateImage != null) {
+        var x = e.pageX - canvas.parent().offsetLeft;
+        var y = e.pageY - canvas.parent().offsetTop;
+        addMark(x, y);
+    }
 }
 
 function drawImage(img) {
