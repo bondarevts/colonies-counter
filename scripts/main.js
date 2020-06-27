@@ -101,3 +101,10 @@ function download(filename, text) {
 function downloadPoints() {
     download(file_name + ".csv", pointsToCSV());
 }
+
+function undoAllClicks() {
+    var confirmation = confirm("All marks will be removed from the image.\nContinue?");
+    if (confirmation == true) {
+        clearMarks();
+    }
+}
