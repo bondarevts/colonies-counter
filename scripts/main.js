@@ -79,11 +79,7 @@ function loadImage() {
 }
 
 function checkMarks(e) {
-    if (points.length == 0) {
-        return true;
-    }
-    var confirmation = confirm("All marks will be removed from the image.\nContinue?");
-    if (confirmation == false) {
+    if (!canRemoveAllMarks()) {
         e.preventDefault();
         return false;
     }
@@ -114,8 +110,14 @@ function downloadPoints() {
 }
 
 function undoAllClicks() {
-    var confirmation = confirm("All marks will be removed from the image.\nContinue?");
-    if (confirmation == true) {
+    if (canRemoveAllMarks()) {
         clearMarks();
     }
+}
+
+function canRemoveAllMarks() {
+    if (points.length == 0) {
+        return true;
+    }
+    return confirm("All marks will be removed from the current image.\nContinue?");
 }
