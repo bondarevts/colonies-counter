@@ -3,7 +3,7 @@
 <body>
 
 <div>
-<input type="file" id="image-browser" onchange='loadImage()'>
+<input type="file" id="image-browser" onclick="checkMarks(event)" onchange='loadImage()'>
 <button type="button" onclick="loadTestImage()">Load a test image</button>
 <button type="button" onclick="undoClick()" style="touch-action: manipulation;">Undo a click</button>
 <button type="button" onclick="undoAllClicks()" style="touch-action: manipulation;">Undo all</button>

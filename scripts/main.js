@@ -78,6 +78,17 @@ function loadImage() {
     reader.readAsDataURL(file);
 }
 
+function checkMarks(e) {
+    if (points.length == 0) {
+        return true;
+    }
+    var confirmation = confirm("All marks will be removed from the image.\nContinue?");
+    if (confirmation == false) {
+        e.preventDefault();
+        return false;
+    }
+}
+
 function drawCircle(x, y, diameter) {
     var radius = diameter / 2;
     return canvas.circle(diameter).fill("rgba(0, 0, 255, 0.4)").move(x - radius, y - radius);
