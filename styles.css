@@ -5,8 +5,7 @@ body {
 .floating {
     touch-action: manipulation;
     width: 100%;
-    height: fit-content;
-    padding: 5px;
+    height: 3em;
     margin: 1px;
 }
 
