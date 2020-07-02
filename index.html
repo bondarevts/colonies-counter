@@ -1,24 +1,32 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <link rel="stylesheet" href="styles.css">
+</head>
 <body>
 
-<div style=" background: white; position: fixed; width: 100%; top: 0; padding-top: 10px">
-<input type="file" id="image-browser" onclick="checkMarks(event)" onchange='loadImage()'>
-<button type="button" onclick="loadTestImage()">Load a test image</button>
-<button type="button" onclick="undoClick()" style="touch-action: manipulation;">Undo a click</button>
-<button type="button" onclick="undoAllClicks()" style="touch-action: manipulation;">Undo all</button>
-<button type="button" onclick="downloadPoints()" style="touch-action: manipulation;">Download points</button>
-<div>
-    <label for="mark-size">Mark Diameter</label>
-    <input type="range" id="mark-size" name="mark-size" min="1" max="80" value="50" oninput="changeMarkSize()">
-    <output name="mark-size-value" id="mark-size-value">50</output>
+<div id="loading-controls">
+    <p>Choose an image to load or use the test image:</p>
+    <input type="file" id="image-browser" onclick="checkMarks(event)" onchange='loadImage()'>
+    <button type="button" onclick="loadTestImage()">Load a test image</button>
 </div>
-<p>Total: <span id="colonies-counter">0</span></p>
+<div id="image-working-area">
+    <div id="mark-size-block">
+        <label for="mark-size">Mark Diameter</label>
+        <input type="range" id="mark-size" name="mark-size" min="1" max="80" value="50" oninput="changeMarkSize()">
+        <output name="mark-size-value" id="mark-size-value">50</output>
+    </div>
+    <div id="floating-block">
+        <div id="controls">
+            <button class="floating" onclick="undoClick()">Undo a Click</button>
+            <button class="floating" onclick="undoAllClicks()">Undo All</button>
+            <button class="floating" onclick="downloadPoints()">Download Points</button>
+        </div>
+        <p id="total">Total: <span id="colonies-counter">0</span></p>
+    </div>
+    <div id="canvas-wrapper"></div>
 </div>
-<div id="canvas-wrapper" style=" margin-top: 110px"></div>
-
 <script src="scripts/svg.js"></script>
 <script src="scripts/main.js"></script>
-
 </body>
 </html>

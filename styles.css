@@ -1,0 +1,37 @@
+body {
+    margin: 0;
+}
+
+.floating {
+    touch-action: manipulation;
+    width: 100%;
+    padding: 5px;
+    margin: 1px;
+}
+
+#loading-controls {
+    margin: 15px;
+}
+
+#mark-size-block {
+    margin: 15px;
+}
+
+#image-working-area {
+    # display: none;
+}
+
+#floating-block {
+    position: fixed;
+    width: 105px;
+    top: 0;
+    right: 0;
+    padding-top: 10px;
+    padding-right: 10px;
+}
+
+#total {
+    background: #ffffff82;
+    padding: 5px;
+    font-size: large;
+}
