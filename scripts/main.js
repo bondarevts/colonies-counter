@@ -57,6 +57,7 @@ function drawImage(img) {
     if (greetingText != null) {
         greetingText.remove();
         greetingText = null;
+        document.getElementById('image-working-area').style.display = 'block';
     }
     if (plateImage != null) {
         plateImage.remove();
