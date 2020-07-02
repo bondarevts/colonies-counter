@@ -2,13 +2,10 @@ body {
     margin: 0;
 }
 
-button {
-    -webkit-appearance: button;
-}
-
 .floating {
     touch-action: manipulation;
     width: 100%;
+    height: fit-content;
     padding: 5px;
     margin: 1px;
 }
