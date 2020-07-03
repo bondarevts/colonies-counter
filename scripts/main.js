@@ -1,14 +1,12 @@
 'use strict';
 var diameter = 50;
-
-var canvas = SVG('canvas-wrapper').style('touch-action', 'manipulation');
 var plateImage = null;
-
-var file_name = '';
+var file_name = null;
 var marks = [];
 var points = [];
 var saved = true;
 
+var canvas = SVG('canvas-wrapper').style('touch-action', 'manipulation');
 canvas.click(markColony);
 
 function addMark(x, y) {
