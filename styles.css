@@ -33,5 +33,6 @@ body {
 #total {
     background: #ffffff82;
     padding: 5px;
+    margin-bottom: 0;
     font-size: large;
 }

@@ -1,3 +1,4 @@
+"use strict";
 var diameter = 50;
 
 var canvas = SVG('canvas-wrapper').size(400, 100).style('touch-action', 'manipulation');
