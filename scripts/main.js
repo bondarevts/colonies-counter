@@ -1,11 +1,11 @@
-"use strict";
+'use strict';
 var diameter = 50;
 
 var canvas = SVG('canvas-wrapper').size(400, 100).style('touch-action', 'manipulation');
-var greetingText = canvas.text("Load an image");
+var greetingText = canvas.text('Load an image');
 var plateImage = null;
 
-var file_name = "";
+var file_name = '';
 var marks = [];
 var points = [];
 var saved = true;
@@ -28,7 +28,7 @@ function clearMarks() {
 }
 
 function updateColoniesCounter() {
-    document.getElementById("colonies-counter").innerText = points.length;
+    document.getElementById('colonies-counter').innerText = points.length;
 }
 
 function undoClick() {
@@ -42,8 +42,8 @@ function undoClick() {
 }
 
 function changeMarkSize() {
-    diameter = parseInt(document.getElementById("mark-size").value);
-    document.getElementById("mark-size-value").value = diameter;
+    diameter = parseInt(document.getElementById('mark-size').value);
+    document.getElementById('mark-size-value').value = diameter;
 }
 
 function markColony(e) {
@@ -73,8 +73,8 @@ function drawImage(img) {
 }
 
 function loadTestImage() {
-    file_name = "test_image.jpg";
-    drawImage("imgs/" + file_name);
+    file_name = 'test_image.jpg';
+    drawImage('imgs/' + file_name);
 }
 
 function loadImage() {
@@ -96,11 +96,11 @@ function checkMarks(e) {
 
 function drawCircle(x, y, diameter) {
     var radius = diameter / 2;
-    return canvas.circle(diameter).fill("rgba(0, 0, 255, 0.4)").move(x - radius, y - radius);
+    return canvas.circle(diameter).fill('rgba(0, 0, 255, 0.4)').move(x - radius, y - radius);
 }
 
 function pointsToCSV() {
-    return points.map(p => p.join(",")).join("\n");
+    return points.map(p => p.join(',')).join('\n');
 }
 
 function download(filename, text) {
@@ -115,7 +115,7 @@ function download(filename, text) {
 }
 
 function downloadPoints() {
-    download(file_name + ".csv", pointsToCSV());
+    download(file_name + '.csv', pointsToCSV());
     saved = true;
 }
 
@@ -129,5 +129,5 @@ function canRemoveAllMarks() {
     if (saved || points.length == 0) {
         return true;
     }
-    return confirm("All marks will be removed from the current image.\nContinue?");
+    return confirm('All marks will be removed from the current image.\nContinue?');
 }
