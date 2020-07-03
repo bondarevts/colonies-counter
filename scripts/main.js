@@ -6,7 +6,8 @@ var marks = [];
 var points = [];
 var saved = true;
 
-var canvas = SVG('canvas-wrapper').style('touch-action', 'manipulation');
+var canvas = SVG().addTo('#canvas-wrapper');
+canvas.style('touch-action', 'manipulation');
 canvas.click(markColony);
 
 function addMark(x, y) {
@@ -45,8 +46,8 @@ function changeMarkSize() {
 
 function markColony(e) {
     if (plateImage != null) {
-        var x = e.pageX - canvas.parent().offsetLeft;
-        var y = e.pageY - canvas.parent().offsetTop;
+        var x = e.pageX - canvas.parent().node.offsetLeft;
+        var y = e.pageY - canvas.parent().node.offsetTop;
         addMark(x, y);
     }
 }
@@ -59,9 +60,8 @@ function drawImage(img) {
         plateImage.remove();
         plateImage = null;
     }
-    plateImage = canvas.image(img);
-    plateImage.loaded(function(loader) {
-        canvas.size(loader.width, loader.height);
+    plateImage = canvas.image(img, function(event) {
+        canvas.size(event.target.naturalWidth, event.target.naturalHeight);
     });
     saved = true;
 }
