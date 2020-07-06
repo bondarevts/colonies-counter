@@ -1,14 +1,25 @@
 'use strict';
 var diameter = 50;
-var plateImage = null;
 var file_name = null;
 var marks = [];
 var points = [];
 var saved = true;
 
-var canvas = SVG().addTo('#canvas-wrapper');
-canvas.style('touch-action', 'manipulation');
-canvas.click(markColony);
+var ns = 'http://www.w3.org/2000/svg'
+var div = document.getElementById('canvas-wrapper')
+var svg = document.createElementNS(ns, 'svg')
+svg.setAttributeNS(null, 'width', '100%')
+svg.setAttributeNS(null, 'height', '100%')
+svg.setAttributeNS(null, 'style', 'touch-action: manipulation;');
+svg.addEventListener('click', markColony);
+div.appendChild(svg)
+
+var plateImage = document.createElementNS(ns, 'image');
+plateImage.addEventListener('load', function(e) {
+    svg.setAttribute('width', svg.scrollWidth);
+    svg.setAttribute('height', svg.scrollHeight);
+})
+svg.appendChild(plateImage);
 
 function addMark(x, y) {
     points.push([x, y, diameter]);
@@ -18,7 +29,7 @@ function addMark(x, y) {
 }
 
 function clearMarks() {
-    marks.forEach(m => m.remove())
+    marks.forEach(m => svg.removeChild(m));
     marks.length = 0;
     points.length = 0;
     updateColoniesCounter();
@@ -34,7 +45,7 @@ function undoClick() {
         return;
     }
     points.pop();
-    marks.pop().remove();
+    svg.removeChild(marks.pop());
     updateColoniesCounter();
     saved = false;
 }
@@ -45,24 +56,18 @@ function changeMarkSize() {
 }
 
 function markColony(e) {
-    if (plateImage != null) {
-        var x = e.pageX - canvas.parent().node.offsetLeft;
-        var y = e.pageY - canvas.parent().node.offsetTop;
-        addMark(x, y);
-    }
+    var x = e.offsetX;
+    var y = e.offsetY;
+    addMark(x, y);
 }
 
 function drawImage(img) {
-    if (plateImage == null) {
+    if (!plateImage.href) {
         document.getElementById('image-working-area').style.display = 'block';
     }  else {
         clearMarks();
-        plateImage.remove();
-        plateImage = null;
     }
-    plateImage = canvas.image(img, function(event) {
-        canvas.size(event.target.naturalWidth, event.target.naturalHeight);
-    });
+    plateImage.setAttributeNS(null, 'href', img);
     saved = true;
 }
 
@@ -90,7 +95,13 @@ function checkMarks(e) {
 
 function drawCircle(x, y, diameter) {
     var radius = diameter / 2;
-    return canvas.circle(diameter).fill('rgba(0, 0, 255, 0.4)').move(x - radius, y - radius);
+    var circle = document.createElementNS(ns, 'circle');
+    circle.setAttributeNS(null, 'r', radius);
+    circle.setAttributeNS(null, 'cx', x);
+    circle.setAttributeNS(null, 'cy', y);
+    circle.setAttributeNS(null, 'fill', 'rgba(0, 0, 255, 0.4)');
+    svg.appendChild(circle);
+    return circle;
 }
 
 function pointsToCSV() {
