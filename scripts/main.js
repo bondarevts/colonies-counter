@@ -6,21 +6,30 @@ var points = [];
 var saved = true;
 
 var ns = 'http://www.w3.org/2000/svg'
-var div = document.getElementById('canvas-wrapper')
-var svg = document.createElementNS(ns, 'svg')
-svg.setAttributeNS(null, 'width', '100%')
-svg.setAttributeNS(null, 'height', '100%')
-svg.setAttributeNS(null, 'style', 'touch-action: manipulation;');
-svg.addEventListener('click', markColony);
-div.appendChild(svg)
+var svg = setupSVG();
+var plateImage = setupPlateImage();
 
-var plateImage = document.createElementNS(ns, 'image');
-plateImage.addEventListener('load', function(e) {
-    var size = plateImage.getBBox();
-    svg.setAttribute('width', size.width);
-    svg.setAttribute('height', size.height);
-})
-svg.appendChild(plateImage);
+function setupSVG() {
+    var div = document.getElementById('canvas-wrapper')
+    var svg = document.createElementNS(ns, 'svg')
+    svg.setAttributeNS(null, 'width', '100%')
+    svg.setAttributeNS(null, 'height', '100%')
+    svg.setAttributeNS(null, 'style', 'touch-action: manipulation;');
+    svg.addEventListener('click', markColony);
+    div.appendChild(svg)
+    return svg;
+}
+
+function setupPlateImage() {
+    var image = document.createElementNS(ns, 'image');
+    image.addEventListener('load', function(e) {
+        var size = image.getBBox();
+        svg.setAttribute('width', size.width);
+        svg.setAttribute('height', size.height);
+    })
+    svg.appendChild(image);
+    return image;
+}
 
 function addMark(x, y) {
     points.push([x, y, diameter]);
