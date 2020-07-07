@@ -15,7 +15,7 @@ function setupSVG() {
     svg.setAttributeNS(null, 'width', '100%')
     svg.setAttributeNS(null, 'height', '100%')
     svg.setAttributeNS(null, 'style', 'touch-action: manipulation;');
-    svg.addEventListener('click', markColony);
+    svg.addEventListener('click', onImageClick);
     div.appendChild(svg)
     return svg;
 }
@@ -29,6 +29,13 @@ function setupPlateImage() {
     })
     svg.appendChild(image);
     return image;
+}
+
+function onImageClick(e) {
+    var svgPosition = svg.getBoundingClientRect()
+    var x = e.x - svgPosition.x;
+    var y = e.y - svgPosition.y;
+    addMark(x, y);
 }
 
 function addMark(x, y) {
@@ -65,13 +72,6 @@ function changeMarkSize() {
     document.getElementById('mark-size-value').value = diameter;
 }
 
-function markColony(e) {
-    var svgPosition = svg.getBoundingClientRect()
-    var x = e.x - svgPosition.x;
-    var y = e.y - svgPosition.y;
-    addMark(x, y);
-}
-
 function drawImage(img) {
     if (!plateImage.getAttributeNS(null, 'href')) {
         document.getElementById('image-working-area').style.display = 'block';
@@ -95,13 +95,6 @@ function loadImage() {
         drawImage(reader.result);
     };
     reader.readAsDataURL(file);
-}
-
-function checkMarks(e) {
-    if (!canRemoveAllMarks()) {
-        e.preventDefault();
-        return false;
-    }
 }
 
 function drawCircle(x, y, diameter) {
