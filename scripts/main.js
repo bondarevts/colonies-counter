@@ -16,8 +16,9 @@ div.appendChild(svg)
 
 var plateImage = document.createElementNS(ns, 'image');
 plateImage.addEventListener('load', function(e) {
-    svg.setAttribute('width', svg.scrollWidth);
-    svg.setAttribute('height', svg.scrollHeight);
+    var size = plateImage.getBBox();
+    svg.setAttribute('width', size.width);
+    svg.setAttribute('height', size.height);
 })
 svg.appendChild(plateImage);
 
@@ -62,7 +63,7 @@ function markColony(e) {
 }
 
 function drawImage(img) {
-    if (!plateImage.href) {
+    if (!plateImage.getAttributeNS(null, 'href')) {
         document.getElementById('image-working-area').style.display = 'block';
     }  else {
         clearMarks();
