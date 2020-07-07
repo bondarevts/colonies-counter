@@ -66,8 +66,9 @@ function changeMarkSize() {
 }
 
 function markColony(e) {
-    var x = e.offsetX;
-    var y = e.offsetY;
+    var svgPosition = svg.getBoundingClientRect()
+    var x = e.x - svgPosition.x;
+    var y = e.y - svgPosition.y;
     addMark(x, y);
 }
 
