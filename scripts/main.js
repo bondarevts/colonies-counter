@@ -134,6 +134,13 @@ function undoAllClicks() {
     }
 }
 
+function checkMarks(e) {
+    if (!canRemoveAllMarks()) {
+        e.preventDefault();
+        return false;
+    }
+}
+
 function canRemoveAllMarks() {
     if (saved || points.length == 0) {
         return true;
