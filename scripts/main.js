@@ -104,12 +104,10 @@ function loadImage() {
     reader.readAsDataURL(file);
 }
 
-
 function makePointsVisible() {
     visible = true;
     document.getElementById('toggle-marks').innerText = 'Hide All';
 }
-
 
 function togglePointsVisibility() {
     marks.forEach(m => m.style.display = visible ? 'none' : '');
@@ -117,11 +115,9 @@ function togglePointsVisibility() {
     visible = !visible;
 }
 
-
 function splitLines(str) {
     return str.split(/\r?\n/);
 }
-
 
 function drawPoints(content) {
     var lines = splitLines(content);
@@ -130,7 +126,6 @@ function drawPoints(content) {
     }
     lines.forEach(l => addMark(...l.split(",")));
 }
-
 
 function loadPoints() {
     var file = document.getElementById('points-browser').files[0];
