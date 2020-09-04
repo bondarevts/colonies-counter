@@ -50,6 +50,7 @@ function addMark(x, y, diameter) {
 }
 
 function clearMarks() {
+    document.getElementById('points-browser').value = '';
     marks.forEach(m => svg.removeChild(m));
     marks.length = 0;
     points.length = 0;
@@ -65,6 +66,7 @@ function undoClick() {
     if (points.length == 0) {
         return;
     }
+    document.getElementById('points-browser').value = '';
     points.pop();
     svg.removeChild(marks.pop());
     updateColoniesCounter();
@@ -115,6 +117,29 @@ function togglePointsVisibility() {
     visible = !visible;
 }
 
+
+function splitLines(str) {
+    return str.split(/\r?\n/);
+}
+
+
+function drawPoints(content) {
+    var lines = splitLines(content);
+    if (lines[lines.length - 1] === "") {
+        lines.pop();
+    }
+    lines.forEach(l => addMark(...l.split(",")));
+}
+
+
+function loadPoints() {
+    var file = document.getElementById('points-browser').files[0];
+    var reader = new FileReader();
+    reader.onload = function() {
+        drawPoints(reader.result);
+    };
+    reader.readAsText(file);
+}
 
 function drawCircle(x, y, diameter) {
     var radius = diameter / 2;
