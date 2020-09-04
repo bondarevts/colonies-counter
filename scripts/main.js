@@ -1,6 +1,7 @@
 'use strict';
 var diameter = 50;
 var file_name = null;
+var visible = true;
 var marks = [];
 var points = [];
 var saved = true;
@@ -32,6 +33,9 @@ function setupPlateImage() {
 }
 
 function onImageClick(e) {
+    if (!visible) {
+        return;
+    }
     var svgPosition = svg.getBoundingClientRect()
     var x = e.x - svgPosition.x;
     var y = e.y - svgPosition.y;
@@ -79,6 +83,7 @@ function drawImage(img) {
         clearMarks();
     }
     plateImage.setAttributeNS(null, 'href', img);
+    makePointsVisible();
     saved = true;
 }
 
@@ -96,6 +101,20 @@ function loadImage() {
     };
     reader.readAsDataURL(file);
 }
+
+
+function makePointsVisible() {
+    visible = true;
+    document.getElementById('toggle-marks').innerText = 'Hide All';
+}
+
+
+function togglePointsVisibility() {
+    marks.forEach(m => m.style.display = visible ? 'none' : '');
+    document.getElementById('toggle-marks').innerText = visible ? 'Show All' : 'Hide All';
+    visible = !visible;
+}
+
 
 function drawCircle(x, y, diameter) {
     var radius = diameter / 2;
