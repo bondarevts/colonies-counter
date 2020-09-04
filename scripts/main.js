@@ -39,10 +39,10 @@ function onImageClick(e) {
     var svgPosition = svg.getBoundingClientRect()
     var x = e.x - svgPosition.x;
     var y = e.y - svgPosition.y;
-    addMark(x, y);
+    addMark(x, y, diameter);
 }
 
-function addMark(x, y) {
+function addMark(x, y, diameter) {
     points.push([x, y, diameter]);
     marks.push(drawCircle(x, y, diameter));
     updateColoniesCounter();
