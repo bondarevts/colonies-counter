@@ -131,6 +131,7 @@ function loadPoints() {
     var file = document.getElementById('points-browser').files[0];
     var reader = new FileReader();
     reader.onload = function() {
+        clearMarks();
         drawPoints(reader.result);
     };
     reader.readAsText(file);
