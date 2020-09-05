@@ -9,8 +9,6 @@
     <p>Choose an image to load or use the test image:</p>
     <button id="image-browser-button" onclick="document.getElementById('image-browser').click()">Load an image</button>
     <input type="file" id="image-browser" onclick="checkMarks(event)" onchange="loadImage()" style="display:none;">
-    <button id="points-browser-button" onclick="document.getElementById('points-browser').click()">Load points</button>
-    <input type="file" id="points-browser" onclick="checkMarks(event)" onchange="loadPoints()" style="display:none;">
     <span style="margin-left: 3em;"></span>
     <button onclick="loadTestImage()">Load a test image</button>
     <span>Current image name: <span id="current-image-name"></span></span>
@@ -23,6 +21,8 @@
     </div>
     <div id="floating-block">
         <div id="controls">
+            <button class="floating" onclick="document.getElementById('points-browser').click()">Load points</button>
+            <input type="file" id="points-browser" onclick="checkMarks(event)" onchange="loadPoints()" style="display:none;">
             <button class="floating" onclick="undoClick()">Undo a Click</button>
             <button class="floating" onclick="undoAllClicks()">Undo All</button>
             <button class="floating" onclick="downloadPoints()">Download Points</button>
