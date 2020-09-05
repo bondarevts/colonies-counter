@@ -71,6 +71,11 @@ function updateColoniesCounter() {
     document.getElementById('colonies-counter').innerText = points.length;
 }
 
+function updateFileName(name) {
+    file_name = name;
+    document.getElementById('current-image-name').innerText = name;
+}
+
 function undoClick() {
     if (points.length == 0) {
         return;
@@ -99,14 +104,14 @@ function drawImage(img) {
 }
 
 function loadTestImage() {
-    file_name = 'test_image.jpg';
+    updateFileName('test_image.jpg');
     document.getElementById('image-browser').value = '';
     drawImage('imgs/' + file_name);
 }
 
 function loadImage() {
     var file = document.getElementById('image-browser').files[0];
-    file_name = file.name;
+    updateFileName(file.name);
     var reader = new FileReader();
     reader.onload = function() {
         drawImage(reader.result);
