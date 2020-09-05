@@ -100,6 +100,7 @@ function drawImage(img) {
 
 function loadTestImage() {
     file_name = 'test_image.jpg';
+    document.getElementById('image-browser').value = '';
     drawImage('imgs/' + file_name);
 }
 
