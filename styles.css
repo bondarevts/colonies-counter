@@ -9,6 +9,13 @@ body {
     margin: 1px;
 }
 
+.floating-text {
+    background: #ffffff82;
+    padding: 5px;
+    margin-bottom: 0;
+    font-size: large;
+}
+
 #loading-controls {
     margin: 15px;
 }
@@ -28,11 +35,4 @@ body {
     right: 0;
     padding-top: 10px;
     padding-right: 10px;
-}
-
-#total {
-    background: #ffffff82;
-    padding: 5px;
-    margin-bottom: 0;
-    font-size: large;
 }

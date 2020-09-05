@@ -36,10 +36,19 @@ function onImageClick(e) {
     if (!visible) {
         return;
     }
-    var svgPosition = svg.getBoundingClientRect()
-    var x = e.x - svgPosition.x;
-    var y = e.y - svgPosition.y;
-    addMark(x, y, diameter);
+    if (e.target.tagName === 'circle') {
+        let index = marks.indexOf(e.target);
+        let mark = marks.splice(index, 1)[0];
+        points.splice(index, 1);
+        svg.removeChild(mark);
+        updateColoniesCounter();
+        saved = false;
+    } else {
+        var svgPosition = svg.getBoundingClientRect()
+        var x = e.x - svgPosition.x;
+        var y = e.y - svgPosition.y;
+        addMark(x, y, diameter);
+    }
 }
 
 function addMark(x, y, diameter) {
