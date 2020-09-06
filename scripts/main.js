@@ -1,5 +1,5 @@
 'use strict';
-var diameter = 50;
+var diameter = 15;
 var file_name = null;
 var visible = true;
 var marks = [];
