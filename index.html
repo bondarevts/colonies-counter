@@ -21,14 +21,14 @@
     </div>
     <div id="floating-block">
         <div id="controls">
-            <button class="floating" onclick="document.getElementById('points-browser').click()">Load points</button>
-            <input type="file" id="points-browser" onclick="checkMarks(event)" onchange="loadPoints()" style="display:none;">
             <button class="floating" onclick="undoClick()">Undo a Click</button>
             <button class="floating" onclick="undoAllClicks()">Undo All</button>
+            <button class="floating" onclick="document.getElementById('points-browser').click()">Load points</button>
+            <input type="file" id="points-browser" onclick="checkMarks(event)" onchange="loadPoints()" style="display:none;">
             <button class="floating" onclick="downloadPoints()">Download Points</button>
+            <button class="floating" id="toggle-marks" onclick="togglePointsVisibility()">Hide All</button>
         </div>
         <p id="total" class="floating-text">Total: <span id="colonies-counter">0</span></p>
-        <button class="floating" id="toggle-marks" onclick="togglePointsVisibility()">Hide All</button>
     </div>
     <div id="canvas-wrapper"></div>
 </div>
