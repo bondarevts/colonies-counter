@@ -87,8 +87,13 @@ function undoClick() {
     saved = false;
 }
 
-function changeMarkSize() {
-    diameter = parseInt(document.getElementById('mark-size').value);
+function changeMarkSize(delta) {
+    if (delta === undefined) {
+        diameter = parseInt(document.getElementById('mark-size').value);
+    } else {
+        diameter += delta;
+        document.getElementById('mark-size').value = diameter;
+    }
     document.getElementById('mark-size-value').value = diameter;
 }
 

@@ -16,7 +16,9 @@
 <div id="image-working-area">
     <div id="mark-size-block">
         <label for="mark-size">Mark Diameter</label>
+        <button onclick="changeMarkSize(-1);">-</button>
         <input type="range" id="mark-size" name="mark-size" min="1" max="80" value="50" oninput="changeMarkSize()">
+        <button onclick="changeMarkSize(+1);">+</button>
         <output name="mark-size-value" id="mark-size-value">50</output>
     </div>
     <div id="floating-block">
